@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, numOfPages, readStatus) {
   this.id = crypto.randomUUID();
@@ -20,22 +20,52 @@ addBookToLibrary("Harry Potter", "J. K. Rowling", "400", true);
 
 addBookToLibrary("Atomic Habits", "James Clear", "200", true);
 
-// const libraryContainer = document.querySelector(".library-container");
+const libraryContainer = document.querySelector(".library-container");
 
-// function displayBooks() {
-//   libraryContainer.innerHTML = "";
+function displayBooks() {
+  libraryContainer.innerHTML = "";
 
-//   myLibrary.forEach((book) => {
-//     const bookCard = document.createElement("div");
-//     const h2 = document.createElement("h2");
+  myLibrary.forEach((book) => {
+    const bookCard = document.createElement("div");
+    const titleElement = document.createElement("h2");
+    const authorElement = document.createElement("p");
+    const pagesElement = document.createElement("p");
+    const statusElement = document.createElement("p");
+    const removeButton = document.createElement("button");
+    const toggleButton = document.createElement("button");
 
-//     bookCard.classList.add("book-card");
+    bookCard.classList.add("book-card");
 
-//     h2.innerText = book.title;
-//     bookCard.append(h2);
+    titleElement.innerText = book.title;
+    authorElement.innerText = `Author : ${book.author}`;
+    pagesElement.innerText = `Pages : ${book.numOfPages}`;
+    statusElement.innerText = `Read Status : ${book.readStatus ? "Read" : "Not Read"}`;
+    removeButton.innerText = `Remove`;
+    toggleButton.innerText = `Change Status`;
 
-//     libraryContainer.append(bookCard);
-//   });
-// }
+    removeButton.addEventListener("click", () => {
+      myLibrary = myLibrary.filter((libraryBook) => libraryBook.id !== book.id);
 
-// displayBooks();
+      displayBooks();
+    });
+
+    toggleButton.addEventListener("click", () => {
+      book.readStatus = !book.readStatus;
+
+      displayBooks();
+    });
+
+    bookCard.append(
+      titleElement,
+      authorElement,
+      pagesElement,
+      statusElement,
+      removeButton,
+      toggleButton,
+    );
+
+    libraryContainer.append(bookCard);
+  });
+}
+
+displayBooks();
