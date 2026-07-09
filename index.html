@@ -8,7 +8,31 @@
   </head>
   <body>
     <h1>Library</h1>
+    <button id="new-book-button">New Book</button>
+    <form id="book-form" class="hidden">
+      <input type="text" name="title" id="title" placeholder="Title" required />
+      <input
+        type="text"
+        name="author"
+        id="author"
+        placeholder="Author"
+        required
+      />
+      <input
+        type="number"
+        name="pages"
+        id="pages"
+        placeholder="Pages"
+        required
+      />
 
+      <label for="read">
+        <input type="checkbox" name="read" id="read" />
+        Read
+      </label>
+
+      <button type="submit">Add Book</button>
+    </form>
     <div class="library-container"></div>
 
     <script src="script.js"></script>

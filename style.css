@@ -1,7 +1,27 @@
 h1 {
-  color: red;
+  color: rgb(234, 90, 90);
+}
+
+.library-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
 }
 
 .book-card {
-  background-color: aqua;
+  background-color: wheat;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0.25rem;
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
 }

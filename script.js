@@ -1,15 +1,42 @@
 let myLibrary = [];
 
-function Book(title, author, numOfPages, readStatus) {
+const addBookButton = document.querySelector("#new-book-button");
+const bookForm = document.querySelector("#book-form");
+
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+const readInput = document.querySelector("#read");
+
+addBookButton.addEventListener("click", () => {
+  bookForm.classList.toggle("hidden");
+});
+
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const title = titleInput.value;
+  const author = authorInput.value;
+  const pages = pagesInput.value;
+  const read = readInput.checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+
+  bookForm.reset();
+  bookForm.classList.add("hidden");
+});
+
+function Book(title, author, pages, read) {
   this.id = crypto.randomUUID();
   this.title = title;
   this.author = author;
-  this.numOfPages = numOfPages;
-  this.readStatus = readStatus;
+  this.pages = pages;
+  this.read = read;
 }
 
-function addBookToLibrary(title, author, numOfPages, readStatus) {
-  const book = new Book(title, author, numOfPages, readStatus);
+function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read);
 
   myLibrary.push(book);
 }
@@ -38,8 +65,8 @@ function displayBooks() {
 
     titleElement.innerText = book.title;
     authorElement.innerText = `Author : ${book.author}`;
-    pagesElement.innerText = `Pages : ${book.numOfPages}`;
-    statusElement.innerText = `Read Status : ${book.readStatus ? "Read" : "Not Read"}`;
+    pagesElement.innerText = `Pages : ${book.pages}`;
+    statusElement.innerText = `Read Status : ${book.read ? "Read" : "Not Read"}`;
     removeButton.innerText = `Remove`;
     toggleButton.innerText = `Change Status`;
 
@@ -50,7 +77,7 @@ function displayBooks() {
     });
 
     toggleButton.addEventListener("click", () => {
-      book.readStatus = !book.readStatus;
+      book.read = !book.read;
 
       displayBooks();
     });
