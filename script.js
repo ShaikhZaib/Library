@@ -1,7 +1,8 @@
 let myLibrary = [];
 
 const addBookButton = document.querySelector("#new-book-button");
-const bookForm = document.querySelector(".form-container");
+const bookForm = document.querySelector("#book-form");
+const formOverlay = document.querySelector(".form-overlay");
 
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
@@ -9,7 +10,14 @@ const pagesInput = document.querySelector("#pages");
 const readInput = document.querySelector("#read");
 
 addBookButton.addEventListener("click", () => {
-  bookForm.classList.toggle("hidden");
+  formOverlay.classList.toggle("hidden");
+});
+
+formOverlay.addEventListener("click", (event) => {
+  if (event.target === formOverlay) {
+    formOverlay.classList.add("hidden");
+    bookForm.reset();
+  }
 });
 
 bookForm.addEventListener("submit", (event) => {
@@ -24,7 +32,7 @@ bookForm.addEventListener("submit", (event) => {
   displayBooks();
 
   bookForm.reset();
-  bookForm.classList.add("hidden");
+  formOverlay.classList.add("hidden");
 });
 
 function Book(title, author, pages, read) {

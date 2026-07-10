@@ -69,14 +69,21 @@ header {
   font-weight: bold;
 }
 
-.form-container {
+.form-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  align-items: center;
+
+  z-index: 1000;
 }
 
 #book-form {
-  width: 350px;
+  width: 380px;
 
   display: flex;
   flex-direction: column;
@@ -88,7 +95,7 @@ header {
 
   border-radius: 12px;
 
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 #book-form input[type="text"],
 #book-form input[type="number"] {
