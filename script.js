@@ -1,7 +1,7 @@
 let myLibrary = [];
 
 const addBookButton = document.querySelector("#new-book-button");
-const bookForm = document.querySelector("#book-form");
+const bookForm = document.querySelector(".form-container");
 
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
@@ -60,13 +60,14 @@ function displayBooks() {
     const statusElement = document.createElement("p");
     const removeButton = document.createElement("button");
     const toggleButton = document.createElement("button");
+    const buttonContainer = document.createElement("div");
 
     bookCard.classList.add("book-card");
 
     titleElement.innerText = book.title;
-    authorElement.innerText = `Author : ${book.author}`;
-    pagesElement.innerText = `Pages : ${book.pages}`;
-    statusElement.innerText = `Read Status : ${book.read ? "Read" : "Not Read"}`;
+    authorElement.innerText = `${book.author}`;
+    pagesElement.innerText = `${book.pages}`;
+    statusElement.innerText = `${book.read ? "Read" : "Not Read"}`;
     removeButton.innerText = `Remove`;
     toggleButton.innerText = `Change Status`;
 
@@ -82,13 +83,25 @@ function displayBooks() {
       displayBooks();
     });
 
+    removeButton.classList.add("remove-btn");
+    toggleButton.classList.add("toggle-btn");
+    buttonContainer.classList.add("button-container");
+
+    console.log(book.read, typeof book.read);
+    if (book.read) {
+      statusElement.classList.add("read");
+    } else {
+      statusElement.classList.add("not-read");
+    }
+
+    buttonContainer.append(removeButton, toggleButton);
+
     bookCard.append(
       titleElement,
       authorElement,
       pagesElement,
       statusElement,
-      removeButton,
-      toggleButton,
+      buttonContainer,
     );
 
     libraryContainer.append(bookCard);
