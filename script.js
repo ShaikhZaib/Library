@@ -35,12 +35,18 @@ bookForm.addEventListener("submit", (event) => {
   formOverlay.classList.add("hidden");
 });
 
-function Book(title, author, pages, read) {
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleReadStatus() {
+    this.read = !this.read;
+  }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -72,12 +78,12 @@ function displayBooks() {
 
     bookCard.classList.add("book-card");
 
-    titleElement.innerText = book.title;
-    authorElement.innerText = `${book.author}`;
-    pagesElement.innerText = `${book.pages}`;
-    statusElement.innerText = `${book.read ? "Read" : "Not Read"}`;
-    removeButton.innerText = `Remove`;
-    toggleButton.innerText = `Change Status`;
+    titleElement.textContent = book.title;
+    authorElement.textContent = `${book.author}`;
+    pagesElement.textContent = `${book.pages}`;
+    statusElement.textContent = `${book.read ? "Read" : "Not Read"}`;
+    removeButton.textContent = `Remove`;
+    toggleButton.textContent = `Change Status`;
 
     removeButton.addEventListener("click", () => {
       myLibrary = myLibrary.filter((libraryBook) => libraryBook.id !== book.id);
@@ -86,7 +92,7 @@ function displayBooks() {
     });
 
     toggleButton.addEventListener("click", () => {
-      book.read = !book.read;
+      book.toggleReadStatus();
 
       displayBooks();
     });
@@ -95,7 +101,6 @@ function displayBooks() {
     toggleButton.classList.add("toggle-btn");
     buttonContainer.classList.add("button-container");
 
-    console.log(book.read, typeof book.read);
     if (book.read) {
       statusElement.classList.add("read");
     } else {
